@@ -18,4 +18,4 @@ class StatsTracker {
     int evil_bot_wins;
     int my_bot_illegal_moves;
     int evil_bot_illegal_moves;
-}
+};
