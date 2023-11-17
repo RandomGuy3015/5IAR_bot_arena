@@ -9,10 +9,7 @@ class Bot {
     public:
         Bot(){};
 
-        
-        int move(int x, int y) {
-            return y * 20 + x;
-        }
+        int move(int x, int y);
 
     private:
 };
