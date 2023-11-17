@@ -11,6 +11,6 @@ MyBot::MyBot(vector<int> _field) {
 }
 
 int MyBot::nextMove() {
-            // ################ HERE GOES YUR CODE #####################
-            return bot.move(10, 10);
+            // ################ HERE GOES YOUR CODE #####################
+            return bot.getMoveID(10, 10);
         }
