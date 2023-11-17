@@ -5,11 +5,10 @@
 using namespace std;
 
 vector<int> field;
-MyBot myBot;
 
 void runGame() {
     setupGame();
-    myBot = MyBot(field);
+    MyBot myBot = MyBot(field);
 
     while (true) {
         int myBotMove = myBot.nextMove();

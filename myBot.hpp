@@ -1,4 +1,5 @@
 #include <vector>
+#include "bot.hpp"
 using namespace std;
 
 
@@ -6,12 +7,11 @@ int example();
 
 class MyBot {
     public:
-        MyBot(vector<int> _field) : field(_field) {};
+        MyBot(vector<int> _field);
 
-        int nextMove() {
-            // ################ HERE GOES YUR CODE #####################
-            return move(10, 10);
-        }
+        int nextMove();
+
     private:
         vector<int> field;
+        Bot bot;
 };

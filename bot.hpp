@@ -1,15 +1,20 @@
 #include <vector>
+#ifndef BOT_H
+#define BOT_H
+
+
 using namespace std;
 
-class GameState {
+class Bot {
     public:
-        GameState(vector<int> _field) : field(_field) {initBots();};
+        Bot(){};
 
-    private:
-        void initBots() {
+        
+        int move(int x, int y) {
+            return y * 20 + x;
         }
 
-        vector<int> field;
+    private:
 };
 
-int move(const int x, const int y);
+#endif
