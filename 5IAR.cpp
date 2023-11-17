@@ -5,9 +5,17 @@
 using namespace std;
 
 vector<int> field;
+MyBot myBot;
 
 void runGame() {
     setupGame();
+    myBot = MyBot(field);
+
+    while (true) {
+        int myBotMove = myBot.nextMove();
+        // logic
+    }
+
 }
 
 void setupGame() {
@@ -15,6 +23,7 @@ void setupGame() {
     for (int i = 0; i < 20*20; i++) {
         field.push_back(0);
     }
+
     printField(field);
 }
 
