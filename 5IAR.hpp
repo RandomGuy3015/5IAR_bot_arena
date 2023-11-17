@@ -7,6 +7,12 @@ void setupGame();
 
 void printField(vector<int> field);
 
+bool checkAndUpdateWins();
+
+bool isLegalMove(int myBotMove);
+
+unsigned long long time();
+
 class StatsTracker {
     StatsTracker() : my_bot_wins(0), evil_bot_wins(0), my_bot_illegal_moves(0), evil_bot_illegal_moves(0){};
 
