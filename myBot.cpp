@@ -1,9 +1,8 @@
 #include "myBot.hpp"
 #include "bot.hpp"
 
-int example()  {
-    return 10;
-}
+#include <iostream>
+#include <tuple>
 
 MyBot::MyBot(vector<int> _field) {
     field = _field;
@@ -11,6 +10,17 @@ MyBot::MyBot(vector<int> _field) {
 }
 
 int MyBot::nextMove() {
-            // ################ HERE GOES YOUR CODE #####################
-            return bot.getMoveID(10, 10);
-        }
+    // ################ HERE GOES YOUR CODE #####################
+    tuple<int, int> pos = tuple<int, int>(-1, -1);
+    while (!bot.isLegal(field, pos))
+    {
+        cout << "Whats the plan boss?\n";
+        cout << "x: ";
+        cin >> get<0>(pos);
+        cout << "y: ";
+        cin >> get<1>(pos);
+        cout << "\n";
+    }
+    
+    return bot.getMoveID(pos);
+}
