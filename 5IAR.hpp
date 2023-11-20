@@ -11,13 +11,13 @@ bool checkAndUpdateWins();
 
 bool isLegalMove(int myBotMove);
 
-int checkDown(int i);
+int checkDown(int i, int color);
 
-int checkRight(int i);
+int checkRight(int i, int color);
 
-int checkDownRight(int i);
+int checkDownRight(int i, int color);
 
-int checkUpRight(int i);
+int checkUpRight(int i, int color);
 
 unsigned long long time();
 

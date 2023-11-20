@@ -62,31 +62,34 @@ bool checkAndUpdateWins() {
     for (int y = 0; y < 20; y++) {
         for (int x = 0; x < 20; x++) {
 
-            if (field[y * 20 + x] == 0) {continue; }
+            int color = field[y * 20 + x];
+
+            if (color == 0) {continue; }
 
             if (y < 15) {
-                int iar = checkDown(y * 20 + x);
+                int iar = checkDown(y * 20 + x, color);
                 if (iar == 5 || iar == 10) {
                     statsTracker.incWin(iar);
                     return true;
                 }
             }
             if (x < 15) {
-                int iar = checkRight(y * 20 + x);
+                int iar = checkRight(y * 20 + x, color);
                 if (iar == 5 || iar == 10) {
                     statsTracker.incWin(iar);
                     return true;
                 }
             }
             if (y < 15 && x < 15) {
-                int iar = checkDownRight(y * 20 + x);
+                int iar = checkDownRight(y * 20 + x, color);
                 if (iar == 5 || iar == 10) {
                     statsTracker.incWin(iar);
+                    printf("%d", iar);
                     return true;
                 }
             }
             if (y >= 4 && x < 15) {
-                int iar = checkUpRight(y * 20 + x);
+                int iar = checkUpRight(y * 20 + x, color);
                 if (iar == 5 || iar == 10) {
                     statsTracker.incWin(iar);
                     return true;
@@ -97,28 +100,28 @@ bool checkAndUpdateWins() {
     return false;
 }
 
-int checkDown(int i) {
+int checkDown(int i, int color) {
     int val = field[i];
-    if (val == 0) {return 0;}
-    return checkDown(i + 20) + val;
+    if (val != color) {return 0;}
+    return checkDown(i + 20, color) + val;
 }
 
-int checkRight(int i) {
+int checkRight(int i, int color) {
     int val = field[i];
-    if (val == 0) {return 0;}
-    return checkRight(i + 1) + val;
+    if (val != color) {return 0;}
+    return checkRight(i + 1, color) + val;
 }
 
-int checkDownRight(int i) {
+int checkDownRight(int i, int color) {
     int val = field[i];
-    if (val == 0) {return 0;}
-    return checkDownRight(i + 21) + val;
+    if (val != color) {return 0;}
+    return checkDownRight(i + 21, color) + val;
 }
 
-int checkUpRight(int i) {
+int checkUpRight(int i, int color) {
     int val = field[i];
-    if (val == 0) {return 0;}
-    return checkUpRight(i - 19) + val;
+    if (val != color) {return 0;}
+    return checkUpRight(i - 19, color) + val;
 }
 
 
