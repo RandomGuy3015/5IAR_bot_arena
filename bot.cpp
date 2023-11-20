@@ -33,9 +33,64 @@ bool Bot::isLegal(vector<int> field, tuple<int, int> move){
     return true;
 };
 
-bool Bot::isMate(vector<int> field){
-    //todo pls Tyler mach du
-};
+int Bot::isMate(vector<int> field){
+    for (int y = 0; y < 20; y++) {
+        for (int x = 0; x < 20; x++) {
+
+            if (field[y * 20 + x] == 0) {continue; }
+
+            if (y < 15) {
+                int iar = checkDown(y * 20 + x, field);
+                if (iar == 5 || iar == 10) {
+                    return iar / 5;
+                }
+            }
+            if (x < 15) {
+                int iar = checkRight(y * 20 + x, field);
+                if (iar == 5 || iar == 10) {
+                    return iar / 5;
+                }
+            }
+            if (y < 15 && x < 15) {
+                int iar = checkDownRight(y * 20 + x, field);
+                if (iar == 5 || iar == 10) {
+                    return iar / 5;
+                }
+            }
+            if (y >= 4 && x < 15) {
+                int iar = checkUpRight(y * 20 + x, field);
+                if (iar == 5 || iar == 10) {
+                    return iar / 5;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+int Bot::checkDown(int i, vector<int> field) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkDown(i + 20, field) + val;
+}
+
+int Bot::checkRight(int i, vector<int> field) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkRight(i + 1, field) + val;
+}
+
+int Bot::checkDownRight(int i, vector<int> field) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkDownRight(i + 21, field) + val;
+}
+
+int Bot::checkUpRight(int i, vector<int> field) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkUpRight(i - 19, field) + val;
+}
 
 vector<tuple<int, int>> Bot::getLegalMoves(vector<int> field){
     vector<tuple<int, int>> legalMoves = vector<tuple<int, int>>();

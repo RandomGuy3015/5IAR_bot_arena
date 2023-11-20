@@ -24,11 +24,15 @@ public:
 
     /*
      * Check if x and y are in field bounds and if the spot is taken
-     * Does not check, if the game is alreay over (use ````isMate```()) 
+     * Does not check, if the game is alreay over (use ```isMate```()) 
     */
     bool isLegal(vector<int> field, tuple<int, int> move);
 
-    bool isMate(vector<int> field);
+    /*
+     * Returns 1 if myBot won and 2 if evilBot won
+     * if its not Mate returns 0
+    */
+    int isMate(vector<int> field);
 
     vector<tuple<int, int>> getLegalMoves(vector<int> field);
 
@@ -37,6 +41,12 @@ public:
     vector<int> undoMove(vector<int> field, tuple<int, int> move);
 
 private:
+    // helper functions for isMate
+    int checkDown(int i, vector<int> field);
+    int checkRight(int i, vector<int> field);
+    int checkDownRight(int i, vector<int> field);
+    int checkUpRight(int i, vector<int> field);
+
 };
 
 #endif
