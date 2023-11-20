@@ -11,17 +11,35 @@ bool checkAndUpdateWins();
 
 bool isLegalMove(int myBotMove);
 
+int checkDown(int i);
+
+int checkRight(int i);
+
+int checkDownRight(int i);
+
+int checkUpRight(int i);
+
 unsigned long long time();
 
 class StatsTracker {
-    StatsTracker() : my_bot_wins(0), evil_bot_wins(0), my_bot_illegal_moves(0), evil_bot_illegal_moves(0){};
+    public:
+        StatsTracker() : my_bot_wins(0), evil_bot_wins(0), my_bot_illegal_moves(0), evil_bot_illegal_moves(0){};
 
-    float myBotWR() {
-        return my_bot_wins / (my_bot_wins + evil_bot_wins) / 100;
-    }
+        float myBotWR() {
+            return my_bot_wins / (my_bot_wins + evil_bot_wins) / 100;
+        }
 
-    int my_bot_wins;
-    int evil_bot_wins;
-    int my_bot_illegal_moves;
-    int evil_bot_illegal_moves;
+        void incWin(int win_value) {
+            if (win_value == 5) {
+                my_bot_wins++;
+            }
+            else if (win_value == 10) {
+                evil_bot_wins++;
+            }
+        }
+
+        int my_bot_wins;
+        int evil_bot_wins;
+        int my_bot_illegal_moves;
+        int evil_bot_illegal_moves;
 };

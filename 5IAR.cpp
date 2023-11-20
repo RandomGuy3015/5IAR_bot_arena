@@ -6,11 +6,25 @@
 using namespace std;
 
 vector<int> field;
-vector<int> dots;
+StatsTracker statsTracker;
 
 void runGame() {
     setupGame();
+
+    field[1] = 1;
+    field[22] = 1;
+    field[43] = 1;
+    field[64] = 1;
+    field[85] = 1;
+    field[43] = 2;
+
+    checkAndUpdateWins();
+
+    printField(field);
+
     MyBot myBot = MyBot(field);
+    statsTracker = StatsTracker();
+
 
     int time_to_play = 1;
     float time_per_turn = 0.001;
@@ -24,39 +38,92 @@ void runGame() {
             int my_bot_move = myBot.nextMove();
             // logic
             if (isLegalMove(my_bot_move)) {
-                field[my_bot_move] = 1;
-                dots.push_back(my_bot_move);
+                field[my_bot_move] = 1;;
                 // for evilBot do (1 << 9 + evil_bot_move)
             }
         }
         setupGame();
     }
 
-}  // don't think dots are needed - recursive method with some fancy stuff should be more efficient.
+}  //  recursive method with some fancy stuff should be more efficient.
 
 void setupGame() {
 
     field.clear();
-    dots.clear();
 
     for (int i = 0; i < 20*20; i++) {
         field.push_back(0);
     }
-    dots.reserve(sizeof(int) * 20*20);
 
     printField(field);
 }
 
 bool checkAndUpdateWins() {
-    for (int i=0; i < dots.size(); i++) {
+    for (int y = 0; y < 20; y++) {
+        for (int x = 0; x < 20; x++) {
+
+            if (field[y * 20 + x] == 0) {continue; }
+
+            if (y < 15) {
+                int iar = checkDown(y * 20 + x);
+                if (iar == 5 || iar == 10) {
+                    statsTracker.incWin(iar);
+                    return true;
+                }
+            }
+            if (x < 15) {
+                int iar = checkRight(y * 20 + x);
+                if (iar == 5 || iar == 10) {
+                    statsTracker.incWin(iar);
+                    return true;
+                }
+            }
+            if (y < 15 && x < 15) {
+                int iar = checkDownRight(y * 20 + x);
+                if (iar == 5 || iar == 10) {
+                    statsTracker.incWin(iar);
+                    return true;
+                }
+            }
+            if (y >= 4 && x < 15) {
+                int iar = checkUpRight(y * 20 + x);
+                if (iar == 5 || iar == 10) {
+                    statsTracker.incWin(iar);
+                    return true;
+                }
+            }
+        }
     }
-    return true;
+    return false;
+}
+
+int checkDown(int i) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkDown(i + 20) + val;
+}
+
+int checkRight(int i) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkRight(i + 1) + val;
+}
+
+int checkDownRight(int i) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkDownRight(i + 21) + val;
+}
+
+int checkUpRight(int i) {
+    int val = field[i];
+    if (val == 0) {return 0;}
+    return checkUpRight(i - 19) + val;
 }
 
 
 bool isLegalMove(int myBotMove) {
-    if (field[myBotMove] == 0) {
-        return true;
+    if (field[myBotMove] == 0) {        return true;
     }
     else {
         return false;
@@ -71,7 +138,13 @@ unsigned long long time() {
 void printField(vector<int> field) {
     for (int y = 0; y<20; y++) {
         for (int x = 0; x<20; x++) {
-            if (x == 0 and y == 0) {
+            if (field[y * 20 + x] == 1){
+                printf("\b \033[1;32mO\033[0m ");
+            }
+            else if (field[y * 20 + x] == 2){
+                printf("\b \033[1;31mO\033[0m ");
+            }
+            else if (x == 0 and y == 0) {
                 printf("┌─");
             }
             else if (x == 0 and y == 19) {
