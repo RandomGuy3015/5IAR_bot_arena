@@ -7,10 +7,12 @@ using namespace std;
 
 vector<int> field;
 StatsTracker statsTracker;
+Bot bot = Bot();
 
 void runGame() {
     setupGame();
 
+    /*
     field[1] = 1;
     field[22] = 1;
     field[43] = 1;
@@ -21,7 +23,7 @@ void runGame() {
     checkAndUpdateWins();
 
     printField(field);
-
+    */
     MyBot myBot = MyBot(field);
     statsTracker = StatsTracker();
 
@@ -36,10 +38,10 @@ void runGame() {
 
         while(checkAndUpdateWins() == false) {
             int my_bot_move = myBot.nextMove();
-            // logic
             if (isLegalMove(my_bot_move)) {
                 field[my_bot_move] = 1;;
                 // for evilBot do (1 << 9 + evil_bot_move)
+                printField(field);
             }
         }
         setupGame();
