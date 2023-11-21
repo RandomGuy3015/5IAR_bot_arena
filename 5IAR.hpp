@@ -15,10 +15,10 @@ class StatsTracker {
         }
 
         void incWin(int win_value) {
-            if (win_value == 5) {
+            if (win_value == 1) {
                 my_bot_wins++;
             }
-            else if (win_value == 10) {
+            else if (win_value == 2) {
                 evil_bot_wins++;
             }
         }

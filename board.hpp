@@ -80,12 +80,17 @@ private:
 
     vector<int> field;
 
-    // helper functions for isMate
-    int checkDown(int i, int player);
-    int checkRight(int i, int player);
-    int checkDownRight(int i, int player);
-    int checkUpRight(int i, int player);
-
+    /* 
+     * Count how many Pieces of a player are in a row.
+     * Directions:
+     * down = 20
+     * right = 1
+     * downright = 21
+     * downleft = 19
+     * ...
+     * Used function for isMate
+    */
+    int countIAR(int start, int player, int direction);
 };
 
 #endif // BOARD_H

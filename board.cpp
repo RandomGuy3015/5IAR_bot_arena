@@ -42,57 +42,27 @@ int Board::isMate() {
 
             if (player == 0) {continue; }
 
+            // 1: down, 2: right, 3: downright, 4. downleft
             if (y < 15) {
-                int iar = checkDown(y * 20 + x, player);
-                if (iar == 5 || iar == 10) {
-                    return (int) iar / 5;
-                }
+                if (countIAR(y * 20 + x, player, 20) == 5) {return player;}
             }
             if (x < 15) {
-                int iar = checkRight(y * 20 + x, player);
-                if (iar == 5 || iar == 10) {
-                    return (int) iar / 5;
-                }
+                if (countIAR(y * 20 + x, player, 1) == 5) {return player;}
             }
             if (y < 15 && x < 15) {
-                int iar = checkDownRight(y * 20 + x, player);
-                if (iar == 5 || iar == 10) {
-                    return (int) iar / 5;
-                }
+                if (countIAR(y * 20 + x, player, 21) == 5) {return player;}
             }
-            if (y >= 4 && x < 15) {
-                int iar = checkUpRight(y * 20 + x, player);
-                if (iar == 5 || iar == 10) {
-                    return (int) iar / 5;
-                }
+            if (x > 4 && y < 15) {
+                if (countIAR(y * 20 + x, player, 19) == 5) {return player;}
             }
         }
     }
     return 0;
 }
 
-int Board::checkDown(int i, int player) {
-    int val = field[i];
-    if (val != player) {return 0;}
-    return checkDown(i + 20, player) + val;
-}
-
-int Board::checkRight(int i, int player) {
-    int val = field[i];
-    if (val != player) {return 0;}
-    return checkRight(i + 1, player) + val;
-}
-
-int Board::checkDownRight(int i, int player) {
-    int val = field[i];
-    if (val != player) {return 0;}
-    return checkDownRight(i + 21, player) + val;
-}
-
-int Board::checkUpRight(int i, int player) {
-    int val = field[i];
-    if (val != player) {return 0;}
-    return checkUpRight(i - 19, player) + val;
+int Board::countIAR(int i, int player, int direction) {
+    if (field[i] != player) {return 0;}
+    return countIAR(i + direction, player, direction) + 1;
 }
 
 vector<int> Board::getLegalMoves(){

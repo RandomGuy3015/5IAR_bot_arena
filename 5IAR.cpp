@@ -32,35 +32,30 @@ void runGame() {
         while(currentWinState == 0) {
             // mybot move 
             int my_bot_move = myBot.nextMove(board);
-            if (board.isLegal(my_bot_move)) {
-                board.makeMove(my_bot_move, 1);
-                board.print();
-                currentWinState = board.isMate();
-                cout << currentWinState << endl;
-            }
-            else {
+            if (!board.isLegal(my_bot_move)) {
                 printf("Illegal move: MyBot\n");
                 currentWinState = 2;
-            }
-            if (currentWinState != 0) {
                 break;
             }
+            board.makeMove(my_bot_move, 1);
+            board.print();
+            currentWinState = board.isMate();
+    
+            if (currentWinState != 0) {break;}
             
             // evilBot move
             int evil_bot_move = evilBot.nextMove(board);
-            if (board.isLegal(evil_bot_move)) {
-                board.makeMove(evil_bot_move, 2);
-                board.print();
-                currentWinState = board.isMate();
-                cout << currentWinState << endl;
-            }
-            else {
+            if (!board.isLegal(evil_bot_move)) {
                 printf("Illegal move: EvilBot\n");
                 currentWinState = 1;
+                break;
             }
+            board.makeMove(evil_bot_move, 2);
+            board.print();
+            currentWinState = board.isMate();
         }
         printf("Somebody won! Yay!");
-        statsTracker.incWin(currentWinState * 5);
+        statsTracker.incWin(currentWinState);
         
         // reset
         board.reset();
