@@ -45,25 +45,25 @@ int Board::isMate() {
             if (y < 15) {
                 int iar = checkDown(y * 20 + x, player);
                 if (iar == 5 || iar == 10) {
-                    return iar % 5;
+                    return (int) iar / 5;
                 }
             }
             if (x < 15) {
                 int iar = checkRight(y * 20 + x, player);
                 if (iar == 5 || iar == 10) {
-                    return iar % 5;
+                    return (int) iar / 5;
                 }
             }
             if (y < 15 && x < 15) {
                 int iar = checkDownRight(y * 20 + x, player);
                 if (iar == 5 || iar == 10) {
-                    return iar % 5;
+                    return (int) iar / 5;
                 }
             }
             if (y >= 4 && x < 15) {
                 int iar = checkUpRight(y * 20 + x, player);
                 if (iar == 5 || iar == 10) {
-                    return iar % 5;
+                    return (int) iar / 5;
                 }
             }
         }

@@ -30,10 +30,11 @@ vector<short> EvilBot::getSortedMeaningfulLegalMoves(Board board) {
             moves.insert(pair<short, short>(sum, i));
         }
     }
+    printf("\n");
     vector<short> out = vector<short>();
     for (map<short, short>::iterator it = moves.begin(); it != moves.end(); it++) {
         out.push_back(it->second);
-        printf("\n%d : x= %d  y= %d\n", it->first, it->second%20, it->second/20);
+        printf("%d : x= %d  y= %d\n", it->first, it->second%20, it->second/20);
     }
     return out;
 }

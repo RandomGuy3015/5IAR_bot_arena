@@ -4,8 +4,6 @@ using namespace std;
 
 void runGame();
 
-void setupGame();
-
 unsigned long long time();
 
 class StatsTracker {

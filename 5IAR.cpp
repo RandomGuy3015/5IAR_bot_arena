@@ -5,17 +5,18 @@
 #include <vector>
 #include <cstdio>
 #include <chrono>
+#include <iostream>
 using namespace std;
 
 StatsTracker statsTracker;
-Board board = Board();
+Board board;
 
 void runGame() {
-    setupGame();
-
     EvilBot evilBot = EvilBot();
     MyBot myBot = MyBot();
+
     statsTracker = StatsTracker();
+    board = Board();
 
 
     int time_to_play = 1;
@@ -34,15 +35,14 @@ void runGame() {
             if (board.isLegal(my_bot_move)) {
                 board.makeMove(my_bot_move, 1);
                 board.print();
+                currentWinState = board.isMate();
+                cout << currentWinState << endl;
             }
             else {
                 printf("Illegal move: MyBot\n");
                 currentWinState = 2;
-                break;
             }
-
-            currentWinState = board.isMate();
-            if (board.isMate() == 1) {
+            if (currentWinState != 0) {
                 break;
             }
             
@@ -51,22 +51,21 @@ void runGame() {
             if (board.isLegal(evil_bot_move)) {
                 board.makeMove(evil_bot_move, 2);
                 board.print();
+                currentWinState = board.isMate();
+                cout << currentWinState << endl;
             }
             else {
                 printf("Illegal move: EvilBot\n");
                 currentWinState = 1;
-                break;
             }
-            currentWinState = board.isMate();
         }
         printf("Somebody won! Yay!");
         statsTracker.incWin(currentWinState * 5);
-        setupGame();
+        
+        // reset
+        board.reset();
+        currentWinState = 0;
     }
-} 
-
-void setupGame() {
-    board.reset();
 }
 
 unsigned long long time() {
