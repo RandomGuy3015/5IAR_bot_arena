@@ -37,39 +37,36 @@ void runGame() {
             }
             else {
                 printf("Illegal move: MyBot\n");
+                currentWinState = 2;
+                break;
             }
 
             currentWinState = board.isMate();
             if (board.isMate() == 1) {
-                statsTracker.incWin(5);
-                break; 
+                break;
             }
             
             // evilBot move
             int evil_bot_move = evilBot.nextMove(board);
-            
             if (board.isLegal(evil_bot_move)) {
-                board.makeMove(my_bot_move, 1);
+                board.makeMove(evil_bot_move, 2);
                 board.print();
             }
             else {
                 printf("Illegal move: EvilBot\n");
+                currentWinState = 1;
+                break;
             }
             currentWinState = board.isMate();
-            if (board.isMate() == 2) {
-                statsTracker.incWin(10);
-                break; 
-            }
         }
         printf("Somebody won! Yay!");
-
+        statsTracker.incWin(currentWinState * 5);
         setupGame();
     }
 } 
 
 void setupGame() {
     board.reset();
-    board.print();
 }
 
 unsigned long long time() {
