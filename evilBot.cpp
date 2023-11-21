@@ -1,35 +1,28 @@
 #include "evilBot.hpp"
-#include "bot.hpp"
+#include "board.hpp"
 #include <map>
 #include <cstdio>
 
-
-
-EvilBot::EvilBot(vector<int> _field) {
-    field = _field;
-    bot = Bot();
-}
-
-int EvilBot::nextMove() {
+int EvilBot::nextMove(Board board) {
     // ################ HERE GOES YOUR CODE #####################
-    vector<short> sortedMoves = getSortedMeaningfulLegalMoves();
+    vector<short> sortedMoves = getSortedMeaningfulLegalMoves(board);
     if (sortedMoves.empty()){
-        return bot.getMoveID(10, 10);
+        return board.getMoveID(10, 10);
     }
     else {
         return sortedMoves[0];
     }
 }
 
-vector<short> EvilBot::getSortedMeaningfulLegalMoves() {
+vector<short> EvilBot::getSortedMeaningfulLegalMoves(Board board) {
     map<short, short> moves = map<short, short>();
     for (short i = 0; i < 20*20; i++) {
         int sum = 0;
         auto f = [](short y) -> short {return (int) y == 2;};
-        if (field[i] != 0) {printf("\033[1;32m O\033[0m"); continue;}
+        if (board[i] != 0) {printf("\033[1;32m O\033[0m"); continue;}
         if (i > 19 && i < 380 && i % 20 > 0 && i % 20 < 19) {
-            sum = f(field[i-20]) + f(field[i+20]) + f(field[i-1]) + f(field[i+1]) + f(field[i + 21]) 
-                         + f(field[i + 19]) + f(field[i - 21]) + f(field[i - 19]);
+            sum = f(board[i-20]) + f(board[i+20]) + f(board[i-1]) + f(board[i+1]) + f(board[i + 21]) 
+                         + f(board[i + 19]) + f(board[i - 21]) + f(board[i - 19]);
         }
         if (i%20 == 0) {printf("\n");};
         printf("% d", sum);

@@ -1,23 +1,10 @@
 #include <vector>
+#include "board.hpp"
 using namespace std;
 
 void runGame();
 
 void setupGame();
-
-void printField(vector<int> field);
-
-bool checkAndUpdateWins();
-
-bool isLegalMove(int myBotMove);
-
-int checkDown(int i, int color);
-
-int checkRight(int i, int color);
-
-int checkDownRight(int i, int color);
-
-int checkUpRight(int i, int color);
 
 unsigned long long time();
 

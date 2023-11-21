@@ -1,18 +1,14 @@
 #include <vector>
-#include "bot.hpp"
+#include "board.hpp"
 using namespace std;
 
 
 
 class EvilBot {
     public:
-        EvilBot(vector<int> _field);
+        EvilBot(){};
 
-        int nextMove();
-        vector<int> field;
+        int nextMove(Board board);
 
-    private:
-        vector<short> getSortedMeaningfulLegalMoves();
-
-        Bot bot;
+        vector<short> getSortedMeaningfulLegalMoves(Board board);
 };

@@ -1,26 +1,22 @@
 #include "myBot.hpp"
-#include "bot.hpp"
+#include "board.hpp"
 
 #include <iostream>
 #include <tuple>
 
-MyBot::MyBot(vector<int> _field) {
-    field = _field;
-    bot = Bot();
-}
-
-int MyBot::nextMove() {
+int MyBot::nextMove(Board board) {
     // ################ HERE GOES YOUR CODE #####################
-    tuple<int, int> pos = tuple<int, int>(-1, -1);
-    while (!bot.isLegal(field, pos))
+    int x = -1;
+    int y = -1;
+    while (!board.isLegal(board.getMoveID(x, y)))
     {
         cout << "Whats the plan boss?\n";
         cout << "x: ";
-        cin >> get<0>(pos);
+        cin >> x;
         cout << "y: ";
-        cin >> get<1>(pos);
+        cin >> y;
         cout << "\n";
     }
     
-    return bot.getMoveID(pos);
+    return board.getMoveID(x, y);
 }

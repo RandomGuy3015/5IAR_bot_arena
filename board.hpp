@@ -1,5 +1,5 @@
-#ifndef BOT_H
-#define BOT_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include <vector>
 #include <tuple> 
@@ -8,12 +8,20 @@ using namespace std;
 
 class Board {
 public:
+    int moveCount;
+
+    /*
+     * creates new empty board
+    */
     Board() {
         reset();
     };
 
     Board(const vector<int>& field): field(field) {}
 
+    /*
+     * reset all moves
+    */
     void reset();
 
     /*
@@ -52,7 +60,24 @@ public:
 
     void undoMove(int move);
 
+    vector<int> getField(){
+        return field;
+    }
+
+    void setField(vector<int> _field){
+        field = _field;
+    }
+
+    int& operator[](int move);
+
 private:
+    // print function is private, so the bots cant print. 
+    // 5IAR functions that are allowed to print are friend functions 
+    friend void runGame();
+    friend void setupGame();
+
+    void print();
+
     vector<int> field;
 
     // helper functions for isMate
@@ -63,4 +88,4 @@ private:
 
 };
 
-#endif
+#endif // BOARD_H
