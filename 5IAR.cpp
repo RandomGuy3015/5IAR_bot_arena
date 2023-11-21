@@ -1,5 +1,6 @@
 #include "5IAR.hpp"
 #include "myBot.hpp"
+#include "evilBot.hpp"
 #include <vector>
 #include <cstdio>
 #include <chrono>
@@ -25,6 +26,7 @@ void runGame() {
     printField(field);
     */
     MyBot myBot = MyBot(field);
+    EvilBot evilBot = EvilBot(field);
     statsTracker = StatsTracker();
 
 
@@ -34,16 +36,36 @@ void runGame() {
     unsigned long long start_time = time();
     unsigned long long end_time = start_time + 10000;
 
-    while (start_time < end_time) {
+    while (time() < end_time) {
 
         while(checkAndUpdateWins() == false) {
             int my_bot_move = myBot.nextMove();
             if (isLegalMove(my_bot_move)) {
-                field[my_bot_move] = 1;;
+                field[my_bot_move] = 1;
+                evilBot.field[my_bot_move] = 1;
                 // for evilBot do (1 << 9 + evil_bot_move)
                 printField(field);
             }
+            else {
+                printf("Illegal move: MyBot\n");
+            }
+
+            if (checkAndUpdateWins() == true) {break; }
+
+            int evil_bot_move = evilBot.nextMove();
+            
+            if (isLegalMove(evil_bot_move)) {
+                field[evil_bot_move] = 2;
+                evilBot.field[evil_bot_move] = 2;
+                // for evilBot do (1 << 9 + evil_bot_move)
+                printField(field);
+            }
+            else {
+                printf("Illegal move: EvilBot\n");
+            }
         }
+        printf("Somebody won! Yay!");
+
         setupGame();
     }
 
@@ -141,6 +163,7 @@ unsigned long long time() {
 }
 
 void printField(vector<int> field) {
+    printf("0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9\n");
     for (int y = 0; y<20; y++) {
         for (int x = 0; x<20; x++) {
             if (field[y * 20 + x] == 1){
@@ -159,13 +182,13 @@ void printField(vector<int> field) {
                 printf("├ ");
             }
             else if (x == 19 and y == 0) {
-                printf("┐ ");
+                printf("┐ 0");
             }
             else if (x == 19 and y == 19) {
-                printf("┘ ");
+                printf("┘ 19");
             }
             else if (x == 19) {
-                printf("┤ ");
+                printf("┤ %d", y);
             }
             else if (y == 0) {
                 printf("┬─");

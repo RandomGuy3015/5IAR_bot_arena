@@ -9,8 +9,10 @@ class EvilBot {
         EvilBot(vector<int> _field);
 
         int nextMove();
+        vector<int> field;
 
     private:
-        vector<int> field;
+        vector<short> getSortedMeaningfulLegalMoves();
+
         Bot bot;
 };
