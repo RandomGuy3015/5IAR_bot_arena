@@ -104,6 +104,7 @@ int& Board::operator[](int move){
 }
 
 void Board::print() {
+    printf("\n0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9\n");
     for (int y = 0; y<20; y++) {
         for (int x = 0; x<20; x++) {
             if (field[y * 20 + x] == 1){
@@ -122,13 +123,13 @@ void Board::print() {
                 printf("├ ");
             }
             else if (x == 19 and y == 0) {
-                printf("┐ ");
+                printf("┐ %d", 0);
             }
             else if (x == 19 and y == 19) {
-                printf("┘ ");
+                printf("┘ %d", 19);
             }
             else if (x == 19) {
-                printf("┤ ");
+                printf("┤ %d", y);
             }
             else if (y == 0) {
                 printf("┬─");

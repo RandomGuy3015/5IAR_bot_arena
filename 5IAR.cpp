@@ -20,7 +20,7 @@ void runGame() {
     board = Board();
 
 
-    int time_to_play = -1;
+    int time_to_play = 1000;
     float time_per_turn = 0.001;
 
     unsigned long long start_time = time();
@@ -64,8 +64,6 @@ void runGame() {
         board.reset();
         currentWinState = 0;
     }
-    statsTracker.evil_bot_wins = 13;
-    statsTracker.my_bot_wins = 28;
     cout << statsTracker;
 }
 
