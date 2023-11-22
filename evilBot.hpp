@@ -9,11 +9,11 @@ class EvilBot {
     public:
         EvilBot(){};
 
-        int nextMove(Board board);
+        int nextMove(Board rk07_);
 
-        vector<short> getSortedMeaningfulLegalMoves(Board board);
+        vector<short> x0033p(Board rk07_);
 
-        pair<short, short> getForcedMove(Board* pBoard, short i, short p);
+        pair<short, short> x021i(Board* pBoard, short i, short p);
     private:
         void print(int i);
         void print(short i);

@@ -15,13 +15,13 @@ StatsTracker statsTracker;
 Board board;
 
 void runGame() {
-    WhatsThePlanBot myBot = WhatsThePlanBot();
+    EvilBot myBot = EvilBot();
     SuperEvilBot evilBot = SuperEvilBot();
 
     statsTracker = StatsTracker();
     board = Board();
 
-    const int time_to_play = 1000;
+    const int time_to_play = 10000;
     const float time_per_turn = 0.001;
 
     unsigned long long start_time = time();
