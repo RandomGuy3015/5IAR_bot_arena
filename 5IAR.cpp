@@ -20,7 +20,7 @@ void runGame() {
     board = Board();
 
 
-    int time_to_play = 1000;
+    int time_to_play = 100;
     float time_per_turn = 0.001;
 
     unsigned long long start_time = time();

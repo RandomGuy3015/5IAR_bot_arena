@@ -53,8 +53,22 @@ public:
      * 2: Player 2 won
     */
     int isMate();
+    /* 
+     * Count how many Pieces of a player are in a row.
+     * Directions:
+     * down = 20
+     * right = 1
+     * downright = 21
+     * downleft = 19
+     * ...
+     * Used function for isMate
+    */
+    int countIAR(int start, int player, int direction);
+    
 
     vector<int> getLegalMoves();
+
+    
 
     void makeMove(int move, int player);
 
@@ -79,18 +93,6 @@ private:
     void print();
 
     vector<int> field;
-
-    /* 
-     * Count how many Pieces of a player are in a row.
-     * Directions:
-     * down = 20
-     * right = 1
-     * downright = 21
-     * downleft = 19
-     * ...
-     * Used function for isMate
-    */
-    int countIAR(int start, int player, int direction);
 };
 
 #endif // BOARD_H

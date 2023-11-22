@@ -11,4 +11,6 @@ class EvilBot {
         int nextMove(Board board);
 
         vector<short> getSortedMeaningfulLegalMoves(Board board);
+
+        pair<short, short> getForcedMove(Board* pBoard, short i);
 };
