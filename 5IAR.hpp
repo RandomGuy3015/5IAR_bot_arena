@@ -32,14 +32,14 @@ public:
     StatsTracker(): stats({{mb_wins, 0},{mb_illegal_moves, 0},{mb_out_of_time, 0}, {mb_turns, 0}, {eb_wins, 0},
         {eb_illegal_moves, 0},{eb_out_of_time, 0}, {eb_turns, 0}, {mb_time, 0}, {eb_time, 0}}), wrongIndexDummy(69) {}
 
-    float myBotWR() const {
+    double myBotWR() const {
         if (stats.at(mb_wins) + stats.at(eb_wins) == 0){return 0;}
-        return (float) stats.at(mb_wins) / (float) stats.at(mb_wins) + stats.at(eb_wins);
+        return (double) stats.at(mb_wins) / (double) stats.at(mb_wins) + stats.at(eb_wins);
     }
 
-    float evilBotWR() const {
+    double evilBotWR() const {
         if (stats.at(mb_wins) + stats.at(eb_wins) == 0){return 0;}
-        return (float) stats.at(eb_wins) / (float) stats.at(mb_wins) + stats.at(eb_wins);
+        return (double) stats.at(eb_wins) / (double) stats.at(mb_wins) + stats.at(eb_wins);
     }
 
     double& operator[](StatisticIndex i) {

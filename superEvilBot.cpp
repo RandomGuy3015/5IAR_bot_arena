@@ -22,7 +22,8 @@ int SuperEvilBot::nextMove(Board board) {
             if (score1 >= 5 || score2 >= 5 || score3 >= 5 || score4 >= 5){
                 return move;
             }
-            float sum = score1 + score2 +score3 + score4 - player + 1.5;
+            float sum = score1 + score2 +score3 + score4;
+            sum += board.getPlayer() == player? 0.5 : 0;
             if (sum > best_score){
                 best_score = sum;
                 best_move = move;

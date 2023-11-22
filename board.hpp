@@ -64,6 +64,8 @@ public:
      * Used function for isMate
     */
     int countIAR(int start, int player, int direction);
+
+    int getPlayer(){return moveCount % 2 + 1;}
     
 
     vector<int> getLegalMoves();

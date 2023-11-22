@@ -3,7 +3,7 @@
 #include "evilBot.hpp"
 #include "superEvilBot.hpp"
 #include "board.hpp"
-#include "WhatsThePlanBot.hpp"
+#include "whatsThePlanBot.hpp"
 
 #include <vector>
 #include <cstdio>
@@ -16,7 +16,7 @@ Board board;
 
 void runGame() {
     SuperEvilBot myBot = SuperEvilBot();
-    EvilBot evilBot = EvilBot();
+    SuperEvilBot evilBot = SuperEvilBot();
 
     statsTracker = StatsTracker();
     board = Board();
@@ -35,6 +35,8 @@ void runGame() {
 
         while(currentWinState == 0) {
             // mybot move
+            string x;
+            cin >> x;
             start_turn = time();
             int my_bot_move = -1;
             try{
@@ -59,8 +61,9 @@ void runGame() {
                 statsTracker[mb_wins]++;
                 break;
             }
-            
+
             // evilBot move
+            cin >> x;
             start_turn = time();
             int evil_Bot_move = -1;
             try{
