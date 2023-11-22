@@ -38,7 +38,7 @@ public:
     }
 
     double evilBotWR() const {
-        if (stats.at(mb_wins) + stats.at(eb_wins) == 0 || stats.at(eb_wins)){return 0;}
+        if (stats.at(mb_wins) + stats.at(eb_wins) == 0 || stats.at(eb_wins) == 0){return 0;}
         return stats.at(eb_wins) / (stats.at(mb_wins) + stats.at(eb_wins));
     }
 
@@ -54,8 +54,8 @@ public:
         if (stats.find(i) == stats.end()) {
             std::cerr << "Invalid statistic index\n";
             return 0;
-        } else if (i == mb_time){return stats.at(i) / stats.at(mb_turns);
-        } else if (i == eb_time){return stats.at(i) / stats.at(eb_turns);}
+        } else if (i == mb_time){return stats.at(i) / stats.at(mb_turns) * 100;
+        } else if (i == eb_time){return stats.at(i) / stats.at(eb_turns) * 100;}
         return stats.at(i);
     }
 private:
