@@ -33,12 +33,12 @@ public:
         {eb_illegal_moves, 0},{eb_out_of_time, 0}, {eb_turns, 0}, {mb_time, 0}, {eb_time, 0}}), wrongIndexDummy(69) {}
 
     double myBotWR() const {
-        if (stats.at(mb_wins) + stats.at(eb_wins) == 0){return 0;}
+        if (stats.at(mb_wins) + stats.at(eb_wins) == 0 || stats.at(mb_wins) == 0){return 0;}
         return (double) stats.at(mb_wins) / (double) stats.at(mb_wins) + stats.at(eb_wins);
     }
 
     double evilBotWR() const {
-        if (stats.at(mb_wins) + stats.at(eb_wins) == 0){return 0;}
+        if (stats.at(mb_wins) + stats.at(eb_wins) == 0 || stats.at(eb_wins)){return 0;}
         return (double) stats.at(eb_wins) / (double) stats.at(mb_wins) + stats.at(eb_wins);
     }
 

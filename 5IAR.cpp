@@ -15,7 +15,7 @@ StatsTracker statsTracker;
 Board board;
 
 void runGame() {
-    SuperEvilBot myBot = SuperEvilBot();
+    WhatsThePlanBot myBot = WhatsThePlanBot();
     SuperEvilBot evilBot = SuperEvilBot();
 
     statsTracker = StatsTracker();
@@ -35,8 +35,6 @@ void runGame() {
 
         while(currentWinState == 0) {
             // mybot move
-            string x;
-            cin >> x;
             start_turn = time();
             int my_bot_move = -1;
             try{
@@ -63,7 +61,6 @@ void runGame() {
             }
 
             // evilBot move
-            cin >> x;
             start_turn = time();
             int evil_Bot_move = -1;
             try{

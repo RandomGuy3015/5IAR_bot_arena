@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <cmath>
 using namespace std;
 
 void Board::reset(){
@@ -43,17 +44,17 @@ int Board::isMate() {
             if (player == 0) {continue; }
 
             // 1: down, 2: right, 3: downright, 4. downleft
-            if (y < 15) {
-                if (countIAR(y * 20 + x, player, 20) == 5) {return player;}
+            if (y < 16) {
+                if (countIAR(y * 20 + x, player, 20) >= 5) {return player;}
             }
-            if (x < 15) {
-                if (countIAR(y * 20 + x, player, 1) == 5) {return player;}
+            if (x < 16) {
+                if (countIAR(y * 20 + x, player, 1) >= 5) {return player;}
             }
-            if (y < 15 && x < 15) {
-                if (countIAR(y * 20 + x, player, 21) == 5) {return player;}
+            if (y < 16 && x < 16) {
+                if (countIAR(y * 20 + x, player, 21) >= 5) {return player;}
             }
-            if (x > 4 && y < 15) {
-                if (countIAR(y * 20 + x, player, 19) == 5) {return player;}
+            if (x > 3 && y < 16) {
+                if (countIAR(y * 20 + x, player, 19) >= 5) {return player;}
             }
         }
     }
@@ -63,6 +64,7 @@ int Board::isMate() {
 int Board::countIAR(int i, int player, int direction) {
     if (i < 0 || i > 399) {return 0;}
     if (field[i] != player) {return 0;}
+    if (abs(floor(i / 20) - floor((i + direction)/ 20)) > 1 || abs(i % 20 - (i + direction) % 20) > 1){return 1;}
     return countIAR(i + direction, player, direction) + 1;
 }
 
