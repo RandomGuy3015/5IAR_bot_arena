@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <map>
 
 #include "board.hpp"
 
@@ -13,29 +14,48 @@ void runGame();
 
 unsigned long long time();
 
+enum StatisticIndex {
+    mb_wins,
+    mb_illegal_moves,
+    mb_out_of_time,
+    mb_turns,
+    mb_time,
+    eb_wins,
+    eb_illegal_moves,
+    eb_out_of_time,
+    eb_turns,
+    eb_time
+};
+
 class StatsTracker {
-    public:
-        StatsTracker() : my_bot_wins(0), evil_bot_wins(0), my_bot_illegal_moves(0), evil_bot_illegal_moves(0){};
+public:
+    StatsTracker(): stats({{mb_wins, 0},{mb_illegal_moves, 0},{mb_out_of_time, 0}, {mb_turns, 0}, {eb_wins, 0},
+        {eb_illegal_moves, 0},{eb_out_of_time, 0}, {eb_turns, 0}, {mb_time, 0}, {eb_time, 0}}), wrongIndexDummy(69) {}
 
-        float myBotWR() const {
-            if (my_bot_wins + evil_bot_wins == 0){return 0;}
-            return (float) my_bot_wins / (float) (my_bot_wins + evil_bot_wins);
+    float myBotWR() const {
+        if (stats.at(mb_wins) + stats.at(eb_wins) == 0){return 0;}
+        return (float) stats.at(mb_wins) / (float) stats.at(mb_wins) + stats.at(eb_wins);
+    }
+
+    double& operator[](StatisticIndex i) {
+        if (stats.find(i) == stats.end()) {
+            std::cerr << "Invalid statistic index\n";
+            return wrongIndexDummy;
         }
+        return stats[i];
+    }
 
-        void incWin(int player) {
-            if (player == 1) {my_bot_wins++;}
-            else if (player == 2) {evil_bot_wins++;}
-        }
-
-        void incIllegal(int player){
-            if (player == 1) {my_bot_illegal_moves++;}
-            else if (player == 2) {evil_bot_illegal_moves++;}
-        }
-
-        int my_bot_wins;
-        int evil_bot_wins;
-        int my_bot_illegal_moves;
-        int evil_bot_illegal_moves;
+    double operator[](StatisticIndex i) const{
+        if (stats.find(i) == stats.end()) {
+            std::cerr << "Invalid statistic index\n";
+            return 0;
+        } else if (i == mb_time){return stats.at(i) / stats.at(mb_turns);
+        } else if (i == eb_time){return stats.at(i) / stats.at(eb_turns);}
+        return stats.at(i);
+    }
+private:
+    std::map<StatisticIndex, double> stats;
+    double wrongIndexDummy;
 };
 
 ostream& operator<<(ostream& os, const StatsTracker &st);
