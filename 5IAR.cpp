@@ -15,8 +15,8 @@ StatsTracker statsTracker;
 Board board;
 
 void runGame() {
-    EvilBot myBot = EvilBot();
-    SuperEvilBot evilBot = SuperEvilBot();
+    SuperEvilBot myBot = SuperEvilBot();
+    EvilBot evilBot = EvilBot();
 
     statsTracker = StatsTracker();
     board = Board();
@@ -53,7 +53,6 @@ void runGame() {
                 break;
             }
             board.makeMove(my_bot_move, 1);
-            board.print();
             currentWinState = board.isMate();
             if (currentWinState == 1) {
                 statsTracker[mb_wins]++;
@@ -79,13 +78,13 @@ void runGame() {
                 break;
             }
             board.makeMove(evil_Bot_move, 2);
-            board.print();
             currentWinState = board.isMate();
             if (currentWinState == 2) {
                 statsTracker[eb_wins]++;
                 break;
             }
         }
+        board.print();
         printf("Player %d won! Yay!\n", currentWinState);
         
         // reset
@@ -104,7 +103,7 @@ ostream& operator<<(ostream& os, const StatsTracker &st){
     os << "############### STATS ############## \n";
     os << "#                "<< "MyBot"                   <<" \t EvilBot   "    <<                     "#\n"; 
     os << "#          wins: "<< (int) st[mb_wins]         <<" \t "<< (int) st[eb_wins] <<         "\t   #\n";
-    os << "#      win rate: "<< (int) st.myBotWR() * 100  <<"%\t "<< (int) st.evilBotWR() * 100<<"%\t   #\n";
+    os << "#      win rate: "<< (int) (st.myBotWR() * 100)<<"%\t "<< (int) (st.evilBotWR() * 100)<<"%\t   #\n";
     os << "# illegal moves: "<< (int) st[mb_illegal_moves]<<" \t "<< (int) st[eb_illegal_moves]<< "\t   #\n";
     os << "# time per move: "<< (int) st[mb_time]         <<"ms\t "<<(int) st[eb_time] <<       "ms\t   #\n";
     os << "#################################### \n";

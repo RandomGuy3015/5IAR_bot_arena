@@ -34,12 +34,12 @@ public:
 
     double myBotWR() const {
         if (stats.at(mb_wins) + stats.at(eb_wins) == 0 || stats.at(mb_wins) == 0){return 0;}
-        return (double) stats.at(mb_wins) / (double) (stats.at(mb_wins) + stats.at(eb_wins));
+        return stats.at(mb_wins) / (stats.at(mb_wins) + stats.at(eb_wins));
     }
 
     double evilBotWR() const {
         if (stats.at(mb_wins) + stats.at(eb_wins) == 0 || stats.at(eb_wins)){return 0;}
-        return (double) stats.at(eb_wins) / (double) (stats.at(mb_wins) + stats.at(eb_wins));
+        return stats.at(eb_wins) / (stats.at(mb_wins) + stats.at(eb_wins));
     }
 
     double& operator[](StatisticIndex i) {
