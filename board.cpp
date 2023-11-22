@@ -104,43 +104,26 @@ int& Board::operator[](int move){
 }
 
 void Board::print() {
+    auto scaleToPattern = [](int x) -> int {return (int)(x + 17)/18;};
+    const char* pattern[] = 
+    {
+        "┌─", "┬─" ,"┐ " , 
+        "├ ", "+ ", "┤ ", 
+        "└─", "┴─", "┘ ",
+        "\b \033[1;32mO\033[0m ",
+        "\b \033[1;31mO\033[0m "
+    };
+
     printf("\n0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9\n");
     for (int y = 0; y<20; y++) {
         for (int x = 0; x<20; x++) {
-            if (field[y * 20 + x] == 1){
-                printf("\b \033[1;32mO\033[0m ");
+            int player = field[y * 20 + x];
+            if (player == 0){
+                printf("%s", pattern[scaleToPattern(y) * 3 + scaleToPattern(x)]);
+                continue;
             }
-            else if (field[y * 20 + x] == 2){
-                printf("\b \033[1;31mO\033[0m ");
-            }
-            else if (x == 0 and y == 0) {
-                printf("┌─");
-            }
-            else if (x == 0 and y == 19) {
-                printf("└─");
-            }
-            else if (x == 0) {
-                printf("├ ");
-            }
-            else if (x == 19 and y == 0) {
-                printf("┐ %d", 0);
-            }
-            else if (x == 19 and y == 19) {
-                printf("┘ %d", 19);
-            }
-            else if (x == 19) {
-                printf("┤ %d", y);
-            }
-            else if (y == 0) {
-                printf("┬─");
-            }
-            else if (y == 19) {
-                printf("┴─");
-            }
-            else {
-                printf("+ ");
-            }
+            printf("%s", pattern[player + 8]);
         }
-        printf("\n");
+        printf(" %d\n", y);
     }
 }
