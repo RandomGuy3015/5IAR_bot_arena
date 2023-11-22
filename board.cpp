@@ -61,6 +61,7 @@ int Board::isMate() {
 }
 
 int Board::countIAR(int i, int player, int direction) {
+    if (i < 0 || i > 399) {return 0;}
     if (field[i] != player) {return 0;}
     return countIAR(i + direction, player, direction) + 1;
 }

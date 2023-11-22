@@ -37,6 +37,11 @@ public:
         return (float) stats.at(mb_wins) / (float) stats.at(mb_wins) + stats.at(eb_wins);
     }
 
+    float evilBotWR() const {
+        if (stats.at(mb_wins) + stats.at(eb_wins) == 0){return 0;}
+        return (float) stats.at(eb_wins) / (float) stats.at(mb_wins) + stats.at(eb_wins);
+    }
+
     double& operator[](StatisticIndex i) {
         if (stats.find(i) == stats.end()) {
             std::cerr << "Invalid statistic index\n";

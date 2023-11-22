@@ -1,7 +1,9 @@
 #include "5IAR.hpp"
 #include "myBot.hpp"
 #include "evilBot.hpp"
+#include "superEvilBot.hpp"
 #include "board.hpp"
+#include "WhatsThePlanBot.hpp"
 
 #include <vector>
 #include <cstdio>
@@ -13,14 +15,13 @@ StatsTracker statsTracker;
 Board board;
 
 void runGame() {
+    SuperEvilBot myBot = SuperEvilBot();
     EvilBot evilBot = EvilBot();
-    MyBot myBot = MyBot();
 
     statsTracker = StatsTracker();
     board = Board();
 
-
-    const int time_to_play = 100;
+    const int time_to_play = 1000;
     const float time_per_turn = 0.001;
 
     unsigned long long start_time = time();
@@ -35,7 +36,12 @@ void runGame() {
         while(currentWinState == 0) {
             // mybot move
             start_turn = time();
-            int my_bot_move = myBot.nextMove(board);
+            int my_bot_move = -1;
+            try{
+                my_bot_move = myBot.nextMove(board);
+            } catch(const std::exception& e){
+                std::cerr << e.what() << '\n';
+            }
             end_turn = time();
             statsTracker[mb_time] += (double) end_turn - start_turn;
             statsTracker[mb_turns]++;
@@ -56,7 +62,12 @@ void runGame() {
             
             // evilBot move
             start_turn = time();
-            int evil_Bot_move = evilBot.nextMove(board);
+            int evil_Bot_move = -1;
+            try{
+                evil_Bot_move = evilBot.nextMove(board);
+            } catch(const std::exception& e){
+                std::cerr << e.what() << '\n';
+            }
             end_turn = time();
             statsTracker[eb_time] += (double) end_turn - start_turn;
             statsTracker[eb_turns]++;
@@ -90,13 +101,12 @@ unsigned long long time() {
 }
 
 ostream& operator<<(ostream& os, const StatsTracker &st){
-    os << fixed << setprecision(2);
-    os << "############### STATS ###############" <<                                  "\n";
-    os << "               "<< "MyBot"                 <<" \t EvilBot    "<<                   "\n"; 
-    os << "         wins: "<< (int) st[mb_wins]       <<" \t "<< (int) st[eb_wins] <<         "\n";
-    os << "     win rate: "<< st.myBotWR() * 100      <<"%\t "<< (1 - st.myBotWR()) * 100 << "%\n";
-    os << "illegal moves: "<< (int) st[mb_illegal_moves]<<" \t "<<(int) st[eb_illegal_moves]<<"\n";
-    os << "time per move: "<< (int) st[mb_time]       <<"ms\t "<< (int) st[eb_time] <<      "ms\n";
-    os << "#####################################"  <<                                 "\n";
+    os << "############### STATS ############## \n";
+    os << "#                "<< "MyBot"                   <<" \t EvilBot   "    <<                     "#\n"; 
+    os << "#          wins: "<< (int) st[mb_wins]         <<" \t "<< (int) st[eb_wins] <<         "\t   #\n";
+    os << "#      win rate: "<< (int) st.myBotWR() * 100  <<"%\t "<< (int) st.evilBotWR() * 100<<"%\t   #\n";
+    os << "# illegal moves: "<< (int) st[mb_illegal_moves]<<" \t "<< (int) st[eb_illegal_moves]<< "\t   #\n";
+    os << "# time per move: "<< (int) st[mb_time]         <<"ms\t "<<(int) st[eb_time] <<       "ms\t   #\n";
+    os << "#################################### \n";
     return os;
 }
