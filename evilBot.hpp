@@ -17,6 +17,6 @@ class EvilBot {
     private:
         void print(int i);
         void print(short i);
-        void print(char s);
+        void print(string s);
         void print(int i, int j);
 };
