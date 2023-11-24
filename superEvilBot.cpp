@@ -3,16 +3,17 @@
 #include <map>
 #include <cstdio>
 #include <random>
+#include <vector>
 #include <iostream>
 
 int SuperEvilBot::nextMove(Board board) {
     // ################ HERE GOES YOUR CODE #####################
     vector<int> moves = board.getLegalMoves();
-    std::random_device rd; // obtain a random number from hardware
-    std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(0, moves.size() - 1); // define the range
-    int best_move = moves[distr(gen)];
-    float best_score = 0.6;
+    random_device rd;
+    mt19937 rng(rd());
+    uniform_int_distribution<int> distr(0, moves.size() - 1);
+    int best_move = moves[distr(rd)];
+    float best_score = 100.6;
     for (int move : moves){
         float sum = 0;
         for (int player : vector<int>({1, 2})){
@@ -32,7 +33,6 @@ int SuperEvilBot::nextMove(Board board) {
             best_score = sum;
             best_move = move;
         }
-        sum = 0;
     }
     return best_move;
 }

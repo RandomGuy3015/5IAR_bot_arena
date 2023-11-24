@@ -46,13 +46,7 @@ public:
     */
     bool isLegal(int move);
 
-    /*
-     * return codes:
-     * 0: no one won 
-     * 1: Player 1 won
-     * 2: Player 2 won
-    */
-    int isMate();
+    bool isMate();
     /* 
      * Count how many Pieces of a player are in a row.
      * Directions:

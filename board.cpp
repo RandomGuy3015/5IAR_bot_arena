@@ -35,7 +35,7 @@ bool Board::isLegal(int move){
     return true;
 };
 
-int Board::isMate() {
+bool Board::isMate() {
     for (int y = 0; y < 20; y++) {
         for (int x = 0; x < 20; x++) {
 
@@ -45,20 +45,20 @@ int Board::isMate() {
 
             // 1: down, 2: right, 3: downright, 4. downleft
             if (y < 16) {
-                if (countIAR(y * 20 + x, player, 20) >= 5) {return player;}
+                if (countIAR(y * 20 + x, player, 20) >= 5) {return true;}
             }
             if (x < 16) {
-                if (countIAR(y * 20 + x, player, 1) >= 5) {return player;}
+                if (countIAR(y * 20 + x, player, 1) >= 5) {return true;}
             }
             if (y < 16 && x < 16) {
-                if (countIAR(y * 20 + x, player, 21) >= 5) {return player;}
+                if (countIAR(y * 20 + x, player, 21) >= 5) {return true;}
             }
             if (x > 3 && y < 16) {
-                if (countIAR(y * 20 + x, player, 19) >= 5) {return player;}
+                if (countIAR(y * 20 + x, player, 19) >= 5) {return true;}
             }
         }
     }
-    return 0;
+    return false;
 }
 
 int Board::countIAR(int i, int player, int direction) {
