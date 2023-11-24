@@ -48,7 +48,7 @@ vector<short> EvilBot::x0033p(Board rk07_) {
     1, -1, 21, 19, -21, -19}; for (short d : v) {sum = max(sum, pBoard->countIAR(i, p, d));} 
     pBoard->undoMove((int)i); return pair<short,short>(sum - 1, i);
 }
-
+/*
 void EvilBot::print(int i) {
     printf(" %d\n", i);
 }
@@ -61,3 +61,4 @@ void EvilBot::print(char s) {
 void EvilBot::print(int i, int j) {
     printf(" %d %d\n", i, j);
 }
+*/
