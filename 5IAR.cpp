@@ -16,10 +16,10 @@ using namespace std;
 Board board;
 
 void runGame() {
-    SuperEvilBot myBot = SuperEvilBot();
+    WhatsThePlanBot myBot = WhatsThePlanBot();
     string myBot_name = "MyBot";
 
-    EvilBot evilBot = EvilBot();
+    SuperEvilBot evilBot = SuperEvilBot();
     string evilBot_name ="EvilBot";
     
     StatsTracker mb_statsTracker = StatsTracker(myBot_name);

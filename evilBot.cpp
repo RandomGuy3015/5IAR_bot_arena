@@ -40,7 +40,7 @@ vector<short> EvilBot::x0033p(Board rk07_) {
     moveValue.first, saved); } } else { if (prt) {if (i%20 == 0) {printf("\n");};
     printf("--%d ", saved);}}} if (prt) {printf("\n");} sort(moves.begin(), moves.end(), []
     (pair<short, short> x, pair<short, short> y){return x.first > y.first;}); vector<short> out = 
-    vector<short>(); for (int i = 0; i < moves.size(); i++) { if (prt) {printf("\n %d : %d %d ", 
+    vector<short>(); for (int i = 0; i < (int) moves.size(); i++) { if (prt) {printf("\n %d : %d %d ", 
     moves[i].first, moves[i].second % 20, moves[i].second / 20);} out.push_back(moves[i].second); }
     return out; } pair<short, short> EvilBot::x021i(Board* pBoard, short i, short p) { 
     if (i % 20 == 0 || i % 20 == 19 || i < 20 || i > 379){return pair<short, short>(0, i);}
@@ -56,7 +56,7 @@ void EvilBot::print(short i) {
     printf(" %d\n", i);
 }
 void EvilBot::print(string s) {
-    printf(" %s\n", s);
+    printf(" %s\n", s[0]);
 }
 void EvilBot::print(int i, int j) {
     printf(" %d %d\n", i, j);
