@@ -55,8 +55,8 @@ void EvilBot::print(int i) {
 void EvilBot::print(short i) {
     printf(" %d\n", i);
 }
-void EvilBot::print(string s) {
-    printf(" %s\n", s[0]);
+void EvilBot::print(char s) {
+    printf(" %s\n", s);
 }
 void EvilBot::print(int i, int j) {
     printf(" %d %d\n", i, j);
